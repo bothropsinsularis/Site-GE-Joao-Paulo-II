@@ -9,7 +9,7 @@
     if (isset($_SESSION['on'])) {
     $logged = true;
     }
-    if($_SESSION['tipo']>2){
+    if($_SESSION['tipo']!=2){
         header('Location: ../../frontend/principal/index.php');
     }
     ?>
@@ -21,11 +21,25 @@
     <link rel="stylesheet" href="../../frontend/public/css/teste.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
-    <style>
-        *{text-align:center;}
-    </style>
     <link rel="icon" href="../../frontend/public/imagens/recursos/logo.png">
-    <title>Adicionar Imagem</title>
+    <title>Painel de Controle</title>
+    <style>
+        .test-card-left {
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            height: 100%;
+            width: 200px;
+            display: flex;
+            text-align: center;
+            align-items: center;
+            padding: 1rem;
+        }
+        .test-card-left a{
+            color: black;
+            text-decoration: none;
+        }
+    </style>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg py-3 custom-navbar">
@@ -84,40 +98,24 @@
       </div>
     </div>
   </nav>
-    <div class="content"><br>
-    <h1>Adicionar Nova Imagem</h1><br>
+    <br><br>
+    <div class="content">
+        <br><h1>Painel de Controle</h1><br><div class="control">
+        <h4>Escolha a função que deseja gerenciar:</h4><br>
+        <div class="test-cards">
+        <div class="test-card-left">
+            <a href="user_mod.php"><strong>Usuário</strong></a>
+        </div><br>
+        <div class="test-card-left">
+            <a href="galeria_adm.php"><strong>Galeria</strong></a>
+        </div><br>
+        <div class="test-card-left">
+            <a href="topicos_adm.php"><strong>Tópicos</strong></a>
+        </div><br>
+        </div></div>
 
-    <form action="update_image.php" method="post" enctype="multipart/form-data">
-
-<fieldset>
-          
-        <div id="part-1">
-        <input class="input-custom" type="hidden" name="id" value="<?= $image['id'] ?>" id="nome">
-        <label for="title">Título:</label>
-        <input class="input-custom" type="text" name="title" placeholder="Título" id="title" required>
-        <br><br>
-        <label for="title">Categoria:</label>
-        <select name="category" id="category" required>
-            <?php
-            $pdo = new PDO('mysql:host=localhost;dbname=jpii', 'root', '');
-            $stmt = $pdo->query("SELECT * FROM categories");
-            $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            foreach ($categories as $category) {
-                echo "<option value=\"{$category['name']}\">{$category['name']}</option>";
-            }
-            ?>
-        </select><br><br>
-        <label for="image">Imagem</label>
-        <input type="file" required id="image" name="image">
-      <br/><br/>
-      <input type="submit" class="btn-custom" id="submitButton" name="Enviar" value="Salvar Alterações">
-    </div>
-    </fieldset>
-</form>
-<a href="galeria_adm.php">Voltar</a>
-</div>
-<br><br>
-<footer class="footer fixed-bottom text-center text-lg-start d-flex w-100 justify-content-between align-items-center ">
+      
+    <footer class="footer fixed-bottom text-center text-lg-start d-flex w-100 justify-content-between align-items-center ">
     <div class="container p-3 d-flex justify-content-between w-100">
       <span class="text-muted">© 2024 Grupo Escoteiro João Paulo II. Todos os direitos reservados.</span>
       <div class="social-icons">
@@ -139,5 +137,6 @@
   </footer>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-    crossorigin="anonymous"></script>  
+    crossorigin="anonymous"></script>
 </body>
+</html>

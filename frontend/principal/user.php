@@ -49,6 +49,11 @@ include_once('../../backend/classes/conn.php')
 .showuser{
   width: 60%;
 }
+.userpfp{
+  height: 300px;
+  width: 300px;
+  border-radius: 100%;
+}
     </style>
 </head>
 <body>
@@ -123,6 +128,13 @@ include_once('../../backend/classes/conn.php')
     <li>
         <h1><?php echo $linha['nome'];?></h1>
     </li><br>
+    <?php
+    
+          if($linha['status']==1){
+            echo('Aviso: Este usuário está banido por ter violado as regras.');
+          }
+
+    ?>
     <li class="userdescricao">
         <?php echo $linha['descricao'] ?>
     </li><br> 
@@ -135,7 +147,7 @@ include_once('../../backend/classes/conn.php')
      <h2>Lista de Tópicos</h2>
 
         <?php
-    $sql = "SELECT * FROM topico WHERE userid=".$_SESSION['userid'];
+    $sql = "SELECT * FROM topico WHERE userid=".$linha['id'];
     $res = $conn -> query($sql);
     if($res->num_rows>0){
       echo '

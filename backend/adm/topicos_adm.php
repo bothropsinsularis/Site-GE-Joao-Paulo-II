@@ -5,7 +5,7 @@ include '../classes/conn.php';
     if (isset($_SESSION['on'])) {
     $logged = true;
     }
-    if($_SESSION['tipo']!=3){
+    if($_SESSION['tipo']>2){
         header('Location: ../../frontend/principal/index.php');
     }
     ?>
@@ -137,7 +137,7 @@ include '../classes/conn.php';
                 </table>
             </div>
         </div>
-        <br><a href="index_adm.php">Voltar</a>
+        <br><?php  if($_SESSION["userid"]==3){echo'<a href="index_adm.php">Voltar</a>';}else{echo('<a href="index_mod.php">Voltar</a>');} ?>
 
     </section>
 

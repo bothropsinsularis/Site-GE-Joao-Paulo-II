@@ -1,5 +1,6 @@
 <?php
 include '../classes/conn.php';
+
     session_start();
     $logged = false;
     if (isset($_SESSION['on'])) {
@@ -8,6 +9,20 @@ include '../classes/conn.php';
     if($_SESSION['tipo']>2){
         header('Location: ../../frontend/principal/index.php');
     }
+
+    if(isset($_GET['verifica'])){
+      if($_GET['verifica']==0){
+      $sql_verifica="UPDATE `tbl_usuarios` SET `status` = '1' WHERE `tbl_usuarios`.`id` = ".$_GET['id'];
+      $res = $conn -> query($sql_verifica);
+      header ("Location: users_adm.php");
+      }
+      else{
+        $sql_verifica="UPDATE `tbl_usuarios` SET `status` = '0' WHERE `tbl_usuarios`.`id` = ".$_GET['id'];
+        $res = $conn -> query($sql_verifica);
+        header ("Location: users_adm.php");
+      }
+  }
+
     ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -32,15 +47,23 @@ include '../classes/conn.php';
     -webkit-overflow-scrolling: touch; 
 }
 
+.centra{
+  display: flex;
+}
+
 .table {
     white-space: nowrap;
+}
+
+.compra{
+  width: 10rem;
 }
   </style>
   <link rel="icon" href="../../frontend/public/imagens/recursos/logo.png">
   <title>Painel de Controle</title>
-</head>
+</head>     
 
-<body>
+
   <nav class="navbar navbar-expand-lg py-3 custom-navbar">
     <div class="container">
 
@@ -98,54 +121,75 @@ include '../classes/conn.php';
       </div>
     </div>
   </nav>
-
-<section>
+    <div class="content"><br>
+    
+    
+   
         <div class="container my-5">
-            <h2 class="text-center mb-4">Painel de Controle da Galeria</h2>
+            <h2>Painel de Controle dos Usuários</h2><br>
             <div class="table-responsive">
                 <table class="table table-bordered table-striped text-center">
                     <thead class="thead-light">
                         <tr>
+                            <th>ID</th>
                             <th>Foto</th>
                             <th>Nome</th>
-                            <th>Ações</th>
+                            <th>Status</th>
                         </tr>
                     </thead>
                     <tbody>
               <?php
-              $sql = "SELECT * FROM images";
+              $sql = "SELECT * FROM tbl_usuarios";
               $res = $conn -> query($sql);
               for($i = 0; $i < $res ->num_rows; $i++){
                 $linha = $res -> fetch_assoc();
-                print '<tr>
-                    <td class="align-middle"><img src="../galeria/uploads/'.$linha["filename"].'" width="80px" alt="Produto" class="img-fluid"></td>
-                    <td class="align-middle">'.$linha["title"].'</td>
+                if($linha['status']==1){
+                  $verificado= "❌";
+                  $verifica=1;
+              } 
+              else{
+                  $verificado= "✔";
+                  $verifica=0;
+              }
+              $t1="value='1'";
+              $t2="value='2'";
+              $t3="value='3'";
+              $t4="value='4'";
+                
+              if($linha['tipo']==0){
+                $t1='value="1" selected';      
+              }
+              if($linha['tipo']==1){
+                  $t2='value="2" selected';      
+              }
+              if($linha['tipo']==2){
+                  $t3='value="3" selected';     
+              }
+              if($linha['tipo']==3){
+                  $t4='value="4" selected';     
+              }
+
+              print '<tr>
+                    <td class="align-middle">'.$linha['id'].'</td>
+                    <td class="align-middle"><img src="../../frontend/public/imagens/usuarios/'.$linha['foto'].'" width="150px" height="150px"></td>
+                    <td class="compra align-middle"><a href="../../frontend/principal/user.php?id='.$linha["id"].'">'.$linha["nome"].'</a></td>
                     <td class="align-middle">
-                        <a href="edit_img.php?id='.$linha["id"].'">
-                        <button class="btn btn-warning btn-sm mx-1">
-                            <i class="bi bi-pencil-square"></i>
-                        </button>
-                        </a>
-                        <a href="delete_img.php?id='.$linha["id"].'">
-                        <button class="btn btn-danger btn-sm mx-1">
-                            <i class="bi bi-trash"></i>
-                        </button>
-                        </a>
+                        <a href="users_adm.php?id='.$linha["id"].'&verifica='.$verifica.'">'.$verificado.'</a>
                     </td>
-                </tr>';
-            }
+                </tr>
+                ';
+              }
+              
               ?>
                     </tbody>
                 </table>
             </div>
         </div>
-        <a href="gerenciar_cat.php">Categorias</a><br>
-        <a href="add_imagem.php">Adicionar Imagem</a>
-        <br><?php  if($_SESSION["userid"]==3){echo'<a href="index_adm.php">Voltar</a>';}else{echo('<a href="index_mod.php">Voltar</a>');} ?>
+        <br><a href="index_mod.php">Voltar</a>
 
     </section>
-
-    <footer class="footer fixed-bottom text-center text-lg-start d-flex w-100 justify-content-between align-items-center ">
+    </div>
+    <footer class="footer text-center text-lg-start d-flex w-100 justify-content-between align-items-center ">
     <div class="container p-3 d-flex justify-content-between w-100">
       <span class="text-muted">© 2024 Grupo Escoteiro João Paulo II. Todos os direitos reservados.</span>
       <div class="social-icons">

@@ -10,18 +10,19 @@ include '../classes/conn.php';
         header('Location: ../../frontend/principal/index.php');
     }
 
-  //   if(isset($_GET['verifica'])){
-  //     if($_GET['verifica']==0){
-  //     $sql_verifica="UPDATE `users` SET `verified` = '1' WHERE `users`.`id` = ".$_GET['id'];
-  //     $res = $conn -> query($sql_verifica);
-  //     header ("Location: adm.php?users");
-  //     }
-  //     else{
-  //         $sql_verifica="UPDATE `users` SET `verified` = '0' WHERE `users`.`id` = ".$_GET['id'];
-  //         $res = $conn -> query($sql_verifica);
-  //     header ("Location: adm.php?users");
-  //     }
-  // }
+    if(isset($_GET['verifica'])){
+      if($_GET['verifica']==0){
+      $sql_verifica="UPDATE `tbl_usuarios` SET `status` = '1' WHERE `tbl_usuarios`.`id` = ".$_GET['id'];
+      $res = $conn -> query($sql_verifica);
+      header ("Location: users_adm.php");
+      }
+      else{
+        $sql_verifica="UPDATE `tbl_usuarios` SET `status` = '0' WHERE `tbl_usuarios`.`id` = ".$_GET['id'];
+        $res = $conn -> query($sql_verifica);
+        header ("Location: users_adm.php");
+      }
+  }
+
     ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -44,6 +45,10 @@ include '../classes/conn.php';
     width: 100%;
     overflow-x: auto; 
     -webkit-overflow-scrolling: touch; 
+}
+
+.centra{
+  display: flex;
 }
 
 .table {
@@ -141,27 +146,46 @@ include '../classes/conn.php';
               for($i = 0; $i < $res ->num_rows; $i++){
                 $linha = $res -> fetch_assoc();
                 if($linha['status']==1){
-                  $verificado= "✔";
+                  $verificado= "❌";
                   $verifica=1;
               } 
               else{
-                  $verificado= "❌";
+                  $verificado= "✔";
                   $verifica=0;
               }
-                print '<tr>
+              $t1="value='1'";
+              $t2="value='2'";
+              $t3="value='3'";
+              $t4="value='4'";
+                
+              if($linha['tipo']==0){
+                $t1='value="1" selected';      
+              }
+              if($linha['tipo']==1){
+                  $t2='value="2" selected';      
+              }
+              if($linha['tipo']==2){
+                  $t3='value="3" selected';     
+              }
+              if($linha['tipo']==3){
+                  $t4='value="4" selected';     
+              }
+
+              print '<tr>
                     <td class="align-middle">'.$linha['id'].'</td>
                     <td class="align-middle"><img src="../../frontend/public/imagens/usuarios/'.$linha['foto'].'" width="150px" height="150px"></td>
-                    <td class="compra align-middle">'.$linha["nome"].'</td>
-                    <td class="compra align-middle"><form method="post" action="altera_saldo.php"><input type="text" name="saldo" value="'.$linha["saldo"].'"><br><br>
+                    <td class="compra align-middle"><a href="../../frontend/principal/user.php?id='.$linha["id"].'">'.$linha["nome"].'</a></td>
+                    <td class="compra align-middle"><form method="post" action="altera_saldo.php"><input class="input-custom" type="text" name="saldo" value="'.$linha["saldo"].'"><br><br>
                     <input type="hidden" name="userid" value="'.$linha['id'].'">
-                    <input type="submit" value="Alterar" name="Alterar">
+                    <input type="submit" class="btn-custom" value="Alterar" name="Alterar">
                     </form></td>
-                    <td> <form type="post"><select id="menu1" name="type" value="3" required="true" class="inp">
-                <option ".$t1."><strong>Comum</strong></option>
-                <option ".$t2."><strong>Escoteiro</strong></option>
-                <option ".$t3."><strong>Escotista</strong></option>
-                <option ".$t4."><strong>Administrador</strong></option>
-                </select><br><br><input type="submit" name="id" value="'.$linha['id'].'"></form></td>
+                    <td> <form method="post" action="altera_tipo.php"><select id="menu1" name="type" value="'.$linha['tipo'].'" required="true" class="input-custom">
+                    <option '.$t1.'><strong>Comum</strong></option>
+                    <option '.$t2.'><strong>Escoteiro</strong></option>
+                    <option '.$t3.'><strong>Escotista</strong></option>
+                    <option '.$t4.'><strong>Administrador</strong></option>
+                    </select><br><br><input type="hidden" name="userid" value="'.$linha['id'].'">
+                    <input type="submit" class="btn-custom" name="Alterar" value="Alterar"></td></form>
                     <td class="align-middle">
                         <a href="users_adm.php?id='.$linha["id"].'&verifica='.$verifica.'">'.$verificado.'</a>
                     </td>
