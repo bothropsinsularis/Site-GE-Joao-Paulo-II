@@ -1,0 +1,78 @@
+body {
+    font-family: monospace;
+    font-size: 30px;
+    user-select: none;
+    padding: 0;
+    margin: 0;
+    background-image: url(../imagens/recursos/background1.png);
+    background-attachment: fixed;
+    background-size: 280vh;
+    background-repeat: no-repeat;
+    }
+    .con img{
+        width: 75%;
+        size: 100%;
+    }
+    h1 {
+    padding: 2%;
+    }
+    .inp {
+    border: solid 2px rgb(0, 0, 0);
+    border-radius: 5px;
+    padding: 1%;
+    width: 300px;
+    font-size: 20px;
+    text-align: center;
+    }
+    .btn {
+    background-color: #8DB084;
+    border: solid white 2px;
+    border-radius: 5px;
+    font-size: 25px;
+    width: 30%;
+    }
+    .btn :hover {
+    background-color: rgba(255, 255, 255, 0.103);
+    }
+    .btn :active {
+    background-color: rgba(123, 102, 247, 0.103);
+    }
+    .err {
+    font-size: 20px;
+    color: #8DB084;
+    }
+    a{
+    color:#8DB084;
+    text-decoration: none;
+    font-size: 20px;
+    }
+    
+    .tabela {
+    border: solid 2px white;
+    border-radius: 5px;
+    padding: 2%;
+    }
+    .tabela td {
+    border: solid 2px white;
+    border-radius: 5px;
+    padding: 3%;
+    width: 400px;
+    text-align: center;
+    }
+    .btn1 {
+        background: none;
+        color: white;
+        border: none;
+        font-size: 25px;
+        width: 100%;
+        }
+    .log{
+        text-align: center;
+    float: right;
+    display: flex;
+    background-color: white;
+    width: 50%;
+    height: 100vh;
+    flex-direction: column;
+    justify-content: center;
+    }
