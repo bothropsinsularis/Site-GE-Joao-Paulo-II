@@ -4,6 +4,7 @@ $logged = false;
 if (isset($_SESSION['on'])) {
     $logged = true;
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
