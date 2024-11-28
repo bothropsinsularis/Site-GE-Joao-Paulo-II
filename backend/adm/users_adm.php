@@ -9,18 +9,7 @@ include '../classes/conn.php';
     if($_SESSION['tipo']!=3){
         header('Location: ../../frontend/principal/index.php');
     }
-    if(isset($_GET['verifica'])){
-        if($_GET['verifica']==0){
-        $sql_verifica="UPDATE `tbl_usuarios` SET `status` = '1' WHERE `compras`.`id` = ".$_GET['id'];
-        $res = $conn -> query($sql_verifica);
-        header ("Location: users_adm.php");
-        }
-        else{
-            $sql_verifica="UPDATE `tbl_usuarios` SET `status` = '0' WHERE `compras`.`id` = ".$_GET['id'];
-            $res = $conn -> query($sql_verifica);
-        header ("Location: users_adm.php");
-        }
-    }
+
   //   if(isset($_GET['verifica'])){
   //     if($_GET['verifica']==0){
   //     $sql_verifica="UPDATE `users` SET `verified` = '1' WHERE `users`.`id` = ".$_GET['id'];
@@ -163,8 +152,9 @@ include '../classes/conn.php';
                     <td class="align-middle">'.$linha['id'].'</td>
                     <td class="align-middle"><img src="../../frontend/public/imagens/usuarios/'.$linha['foto'].'" width="150px" height="150px"></td>
                     <td class="compra align-middle">'.$linha["nome"].'</td>
-                    <td class="compra align-middle"><form method="post"><input type="text" name="saldo" value="R$: '.$linha["saldo"].'"><br><br>
-                    <input type="submit" value="Alterar">
+                    <td class="compra align-middle"><form method="post" action="altera_saldo.php"><input type="text" name="saldo" value="'.$linha["saldo"].'"><br><br>
+                    <input type="hidden" name="userid" value="'.$linha['id'].'">
+                    <input type="submit" value="Alterar" name="Alterar">
                     </form></td>
                     <td> <form type="post"><select id="menu1" name="type" value="3" required="true" class="inp">
                 <option ".$t1."><strong>Comum</strong></option>
@@ -177,12 +167,8 @@ include '../classes/conn.php';
                     </td>
                 </tr>
                 ';
-                if(isset($_POST['Alterar'])){
-                    $sql_altera='UPDATE tbl_usuarios SET saldo='.$_POST["saldo"];
-                    $res_altera = $conn -> query($sql_altera); 
-                    header('Location: users_adm.php');
-                }
-            }
+              }
+              
               ?>
                     </tbody>
                 </table>

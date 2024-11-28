@@ -6,7 +6,11 @@
     $nome = $_POST['nome'];
     $body = $_POST['body'];
     $img = $_FILES['anexo'];
-     
+    $sql = "SELECT * FROM tbl_usuarios WHERE id LIKE ".$_SESSION['userid'];
+    $resuser = $conn -> query($sql);
+    $user = $resuser -> fetch_assoc();
+    
+    if($user['status']==0){
 
         $sql_add = "INSERT INTO topico (nome, body, data, anexos, userid) VALUES
                 ('".$nome."',
@@ -16,7 +20,14 @@
                 ".$_SESSION['userid'].");";
 
             $res = $conn -> query($sql_add);
-         header('Location:../../backend/forum/main.php');
+            header('Location:../../backend/forum/main.php');
+    }
+    else{
+        
+        echo('<script>>alert("Usuário Inválido.");</script>');
+        
+        header('Location:../../backend/forum/main.php');
+    }
 
    
     
