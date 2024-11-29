@@ -75,7 +75,7 @@ Os pré-requisitos para a inicialização do sistema são:
 
 #### 1.3. Instalação 
 ___
-Clone/faça download deste repositório na sua pasta `/htdocs`. Inicie o Apache e MySQL na interface XAMPP. No navegador, acesse o endereço `localhost/phpmyadmin` e selecione `+ Novo` na seção de bancos de dados. Logo, entre na aba "Importar", e entre com o arquivo `jpii.sql`. De volta à uma nova guia do navegador, entre no endereço `localhost/jpii`.
+Clone/faça download deste repositório na sua pasta `/htdocs`. Inicie o Apache e MySQL na interface XAMPP. No navegador, acesse o endereço `localhost/phpmyadmin` e selecione `+ Novo` na seção de bancos de dados. Logo, entre na aba "Importar", e entre com o arquivo `jpii.sql`. De volta à uma nova guia do navegador, entre no endereço `localhost/Site-GE-Joao-Paulo-II`.
 
 <br>
 
