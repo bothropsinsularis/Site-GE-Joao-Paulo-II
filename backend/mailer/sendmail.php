@@ -48,7 +48,7 @@
                 echo 'Mensagem enviada.';
             }
 
-        // header('Location: fale.php?enviada=True')
+        header('Location: fale.php?enviada=True')
 
 
 ?>
