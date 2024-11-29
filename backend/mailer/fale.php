@@ -87,7 +87,7 @@ if(isset($_GET['enviada'])){
   </nav>
   <div id="container">
 
-      <form method="POST" action="sendmail.php">
+      <form method="POST" enctype="multipart/form-data" action="sendmail.php">
           <fieldset>
               <b><h3>FALE CONOSCO</h3></b><br>
               
