@@ -56,13 +56,7 @@ ___
 
 ## 2. Sistema
 #### 1.1. Interface
-___
 
-Prototipada utilizando a ferramenta [Figma](https://www.figma.com/pt-br/).
-
-<img align="center" src="/public/assets/prot.png" width="auto" height="auto">
-
-<br><br>
 
 #### 1.2. Pré-Requisitos
 ___
