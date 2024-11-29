@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 04/10/2024 às 02:08
+-- Tempo de geração: 29/11/2024 às 21:22
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.0.30
 
@@ -60,13 +60,20 @@ CREATE TABLE `comentarios` (
   `resposta_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- --------------------------------------------------------
+
 --
--- Despejando dados para a tabela `comentarios`
+-- Estrutura para tabela `compras`
 --
 
-INSERT INTO `comentarios` (`id`, `body`, `data`, `userid`, `tipo`, `idcomentario`, `anexos`, `created_at`, `post_id`, `resposta_id`) VALUES
-(37, '11111111111111111', '2024-09-30', 9, 0, 42, '', '2024-09-30 16:33:13', NULL, NULL),
-(38, '22222222222', '2024-09-30', 9, 0, 41, '', '2024-09-30 17:53:52', NULL, NULL);
+CREATE TABLE `compras` (
+  `id` int(11) NOT NULL,
+  `userid` int(11) DEFAULT NULL,
+  `compra` varchar(900) DEFAULT NULL,
+  `valor` float DEFAULT NULL,
+  `data` date DEFAULT NULL,
+  `estado` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -88,8 +95,7 @@ CREATE TABLE `events` (
 --
 
 INSERT INTO `events` (`id`, `title`, `description`, `event_date`, `created_by`, `created_at`) VALUES
-(1, 'sdffd', 'sdfsdfsdfsd', '2024-09-10', 1, '2024-09-09 10:14:37'),
-(2, 'sdfsdfd', 'sdfsdf', '2024-10-09', 1, '2024-09-17 12:33:09');
+(4, 'Acampamento Ano Novo 2024', 'Última atividade do ano, durando por dois dias.', '2024-12-20', 9, '2024-11-29 19:19:13');
 
 -- --------------------------------------------------------
 
@@ -113,10 +119,9 @@ CREATE TABLE `images` (
 --
 
 INSERT INTO `images` (`id`, `title`, `filename`, `description`, `categoria`, `created_at`, `categoriaid`, `userid`) VALUES
-(1, 'Elo 2019', 'imagem_2024-10-01_095350365.png', NULL, 'Eventos Distritais', '2024-10-01 12:59:19', NULL, 9),
+(1, 'Elo 2020', 'imagem_2024-10-01_095350365.png', NULL, 'Eventos Distritais', '2024-10-01 12:59:19', NULL, 9),
 (2, 'Ponta de Flecha 2024', 'imagem_2024-10-01_122504675.png', NULL, 'Eventos Distritais', '2024-10-01 15:25:06', NULL, 9),
 (3, 'Ponta de Flecha 2024', 'imagem_2024-10-01_122552171.png', NULL, 'Eventos Distritais', '2024-10-01 15:25:53', NULL, 9),
-(4, 'Ponta de Flecha 2024', 'imagem_2024-10-01_122611649.png', NULL, 'Eventos Distritais', '2024-10-01 15:26:12', NULL, 9),
 (5, 'Atividade Sobre Religiões', 'imagem_2024-10-01_170059635.png', NULL, 'Eventos Distritais', '2024-10-01 20:01:07', NULL, 9),
 (6, 'Treinamento de Ciclismo', 'imagem_2024-10-01_170234160.png', NULL, 'Eventos Distritais', '2024-10-01 20:02:39', NULL, 9);
 
@@ -136,16 +141,6 @@ CREATE TABLE `notificacoes` (
   `lida` tinyint(4) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Despejando dados para a tabela `notificacoes`
---
-
-INSERT INTO `notificacoes` (`id`, `userid`, `tipo`, `item_id`, `mensagem`, `data`, `lida`) VALUES
-(3, 9, 'resposta', 37, 'Você recebeu uma resposta!', '2024-09-30 13:47:00', 0),
-(4, 9, 'resposta', 37, 'Você recebeu uma resposta!', '2024-09-30 13:48:33', 0),
-(5, 9, 'resposta', 37, 'Você recebeu uma resposta!', '2024-09-30 14:50:48', 0),
-(6, 9, 'resposta', 38, 'Você recebeu uma resposta!', '2024-09-30 14:53:56', 0);
-
 -- --------------------------------------------------------
 
 --
@@ -155,19 +150,22 @@ INSERT INTO `notificacoes` (`id`, `userid`, `tipo`, `item_id`, `mensagem`, `data
 CREATE TABLE `produtos` (
   `id` int(11) NOT NULL,
   `nome` varchar(80) NOT NULL,
-  `descricao` varchar(2000) NOT NULL,
-  `quantidade` int(11) NOT NULL,
-  `categoria` varchar(60) NOT NULL,
-  `preco` int(11) NOT NULL,
-  `foto` varchar(255) NOT NULL
+  `descricao` varchar(2000) DEFAULT NULL,
+  `quantidade` int(11) DEFAULT NULL,
+  `estoque` int(11) DEFAULT NULL,
+  `preco` int(11) DEFAULT NULL,
+  `foto` varchar(255) DEFAULT NULL,
+  `userid` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Despejando dados para a tabela `produtos`
 --
 
-INSERT INTO `produtos` (`id`, `nome`, `descricao`, `quantidade`, `categoria`, `preco`, `foto`) VALUES
-(184, 'Corda', 'Corda Multifilamento Pp Carga Caminhão Carretinha   COMPRIMENTO: 10 METROS  DIÂMETRO: 8mm  Garantia do vendedor: 30 dias', 50, 'utilidades', 30, '9a05c8c10fd7bbb63efa8470648d6f32.png');
+INSERT INTO `produtos` (`id`, `nome`, `descricao`, `quantidade`, `estoque`, `preco`, `foto`, `userid`) VALUES
+(4, 'Corda1', '  <div class=\"ui-pdp-container__row ui-pdp-container__row--highlighted-features-title\"> <h2 class=\"ui-vpp-text-alignment--left ui-pdp-color--BLACK ui-pdp-size--XSMALL ui-pdp-family--SEMIBOLD highlighted-features-title\">O que voc&ecirc; precisa saber sobre este produto</h2> </div> <div class=\"ui-pdp-container__row ui-pdp-container__row--highlighted-features\"> <div class=\"ui-vpp-highlighted-specs__features\"> <ul class=\"ui-vpp-highlighted-specs__features-list\"> <li class=\"ui-vpp-highlighted-specs__features-list-item ui-pdp-color--BLACK ui-pdp-size--XSMALL ui-pdp-family--REGULAR\">Di&acirc;metro: 4 mm</li> <li class=\"ui-vpp-highlighted-specs__features-list-item ui-pdp-color--BLACK ui-pdp-size--XSMALL ui-pdp-family--REGULAR\">Comprimento: 10 m</li> <li class=\"ui-vpp-highlighted-specs__features-list-item ui-pdp-color--BLACK ui-pdp-size--XSMALL ui-pdp-family--REGULAR\">Sua for&ccedil;a de impacto m&aacute;xima &eacute; de 2kN.</li> <li class=\"ui-vpp-highlighted-specs__features-list-item ui-pdp-color--BLACK ui-pdp-size--XSMALL ui-pdp-family--REGULAR\">Recomendado para camping.</li> </ul> </div> </div>', 1, 25, 20, 'pngtree-colorful-rope-roll-on-transparent-background-perfect-for-crafting-or-outdoor-png-image_13138920.png', 9),
+(5, 'Lanterna Recarregável 80-100', '<p>Quantidade de LEDs da lanterna: 2 LEDS: 1 LED alto brilho frontal / 1 LED COB Lateral | Fluxo luminoso (l&uacute;mens): LED frontal??80 lm / LED lateral??100 lm | Bateria: 3,7 V - 1,2 Ah - &Iacute;ons de l&iacute;tio | Entrada de carregamento: Mini USB 5 V DC | Cor da lanterna: Preta/amarela</p>  <p>Ref.: VONDER-8075080100</p>  <p>Marca.: VONDER *Imagens meramente ilustrativas</p>  <p>*Todas as informa&ccedil;&otilde;es divulgadas s&atilde;o de responsabilidade do Fabricante/Fornecedor</p>', 1, 30, 18, 'ebd4df22ea65915e6f4941d1b3056fc4.png', 9),
+(6, 'Nautika barraca de camping panda iglu para 2 pessoas', '<div class=\"ui-pdp-container__row ui-pdp-container__row--highlighted-features-title\"> <div class=\"ui-pdp-container__row ui-pdp-container__row--highlighted-features-title\"> <h2 class=\"ui-vpp-text-alignment--left ui-pdp-color--BLACK ui-pdp-size--XSMALL ui-pdp-family--SEMIBOLD highlighted-features-title\">O que voc&ecirc; precisa saber sobre este produto</h2> </div> <div class=\"ui-pdp-container__row ui-pdp-container__row--highlighted-features\"> <div class=\"ui-vpp-highlighted-specs__features\"> <ul class=\"ui-vpp-highlighted-specs__features-list\"> <li class=\"ui-vpp-highlighted-specs__features-list-item ui-pdp-color--BLACK ui-pdp-size--XSMALL ui-pdp-family--REGULAR\">Pr&aacute;tica e confort&aacute;vel para 2 pessoas</li> <li class=\"ui-vpp-highlighted-specs__features-list-item ui-pdp-color--BLACK ui-pdp-size--XSMALL ui-pdp-family--REGULAR\">Piso de polietileno de alta resist&ecirc;ncia e antifungos</li> <li class=\"ui-vpp-highlighted-specs__features-list-item ui-pdp-color--BLACK ui-pdp-size--XSMALL ui-pdp-family--REGULAR\">Acompanha estacas, cordas e varetas para montagem</li> <li class=\"ui-vpp-highlighted-specs__features-list-item ui-pdp-color--BLACK ui-pdp-size--XSMALL ui-pdp-family--REGULAR\">Inclui sacola para transporte</li> <li class=\"ui-vpp-highlighted-specs__features-list-item ui-pdp-color--BLACK ui-pdp-size--XSMALL ui-pdp-family--REGULAR\">Bolso interno para pequenos objetos.</li> <li class=\"ui-vpp-highlighted-specs__features-list-item ui-pdp-color--BLACK ui-pdp-size--XSMALL ui-pdp-family--REGULAR\">Fabricada em Poli&eacute;ster com acr&iacute;lico</li> <li class=\"ui-vpp-highlighted-specs__features-list-item ui-pdp-color--BLACK ui-pdp-size--XSMALL ui-pdp-family--REGULAR\">Estrutura composta por varetas de fibra de vidro interligadas por el&aacute;sticos internos com material 100% virgem</li> <li class=\"ui-vpp-highlighted-specs__features-list-item ui-pdp-color--BLACK ui-pdp-size--XSMALL ui-pdp-family--REGULAR\">Com sistema NANO-FLEX que proporciona uma montagem f&aacute;cil ', 1, 5, 100, '2cacdf6637682e3a9284299fabde4071.png', 9);
 
 -- --------------------------------------------------------
 
@@ -182,18 +180,6 @@ CREATE TABLE `respostas` (
   `resposta` text NOT NULL,
   `data` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Despejando dados para a tabela `respostas`
---
-
-INSERT INTO `respostas` (`id`, `comentario_id`, `usuario_id`, `resposta`, `data`) VALUES
-(1, 37, 9, '111111111111111', '2024-09-30 16:33:16'),
-(2, 37, 6, '222222222222222222', '2024-09-30 16:33:53'),
-(3, 37, 9, '2222222222222', '2024-09-30 16:47:00'),
-(4, 37, 9, '2222222222', '2024-09-30 16:48:33'),
-(5, 37, 9, '33333333333333', '2024-09-30 17:50:48'),
-(6, 38, 9, '4444444444444444444', '2024-09-30 17:53:56');
 
 -- --------------------------------------------------------
 
@@ -210,18 +196,20 @@ CREATE TABLE `tbl_usuarios` (
   `descricao` varchar(255) NOT NULL,
   `tipo` varchar(1) NOT NULL,
   `status` varchar(1) NOT NULL,
-  `foto` varchar(255) NOT NULL
+  `foto` varchar(255) NOT NULL,
+  `saldo` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Despejando dados para a tabela `tbl_usuarios`
 --
 
-INSERT INTO `tbl_usuarios` (`id`, `username`, `nome`, `email`, `senha`, `descricao`, `tipo`, `status`, `foto`) VALUES
-(1, '', 'João', 'joao_gomes@gmail.com', 'senha123', '', '1', '0', '../public/imagens'),
-(5, '', 'Teste', 'teste@gmail.com', 'teste123456', '', '1', '0', ''),
-(6, '', 'Ademilson212345', 'adm@gmail.com', '12345678', '', '2', '0', 'f2d9d3267c620e4cedfc0804fe497945.jpg'),
-(9, '', 'admin', 'admin', 'admin', '', '3', '0', '518c92adb3f96fba53e483f0667ef4a2.jpg');
+INSERT INTO `tbl_usuarios` (`id`, `username`, `nome`, `email`, `senha`, `descricao`, `tipo`, `status`, `foto`, `saldo`) VALUES
+(9, '', 'admin', 'admin', 'admin', '', '3', '0', '5bbba0ab05b5cd44bc64fcb2292ba179.png', 0),
+(11, '', 'Henrique Oliveira', 'henrique.oliveira17@escoteiromail.com', '12345678', 'Comecei no escotismo aos 8 anos e me especializei em orientação e técnicas de sobrevivência. O escotismo me ensinou resiliência e trabalho em equipe. Hoje, compartilho minhas experiências com outros jovens.', '1', '0', 'a5d32e0a7273b3f6441a7a1a843a1140.png', 70),
+(12, '', 'Beatriz Almeida', ' beatriz.almeida30@escoteiros.org', '12345678', 'Sou líder escoteira e educadora. Meu foco é ajudar jovens a desenvolverem liderança e trabalho em equipe, acreditando no impacto do escotismo na formação de cidadãos responsáveis.', '2', '0', '760b8a5fc2aec4eff3b48ff971db6a7d.png', 0),
+(13, '', 'José Martins', ' jose.martins45@escoteirosempre.com', '12345678', 'Escoteiro desde a infância, com 30 anos de experiência. Hoje, me dedico a formar novos líderes e preservar os princípios do escotismo, como respeito e serviço à comunidade.', '2', '0', 'b28cd777169406e0a8f9642f524c4499.png', 0),
+(14, '', 'Cláudia Ferreira', ' claudia.ferreira25@escotismo.org', '12345678', '', '0', '0', 'd1a6ba24b5b37fb113ac0443308da3df.png', 0);
 
 -- --------------------------------------------------------
 
@@ -235,15 +223,16 @@ CREATE TABLE `topico` (
   `body` varchar(2000) NOT NULL,
   `data` date NOT NULL,
   `anexos` varchar(500) NOT NULL,
-  `userid` int(11) NOT NULL
+  `userid` int(11) NOT NULL,
+  `restrito` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Despejando dados para a tabela `topico`
 --
 
-INSERT INTO `topico` (`id`, `nome`, `body`, `data`, `anexos`, `userid`) VALUES
-(44, 'Como fazer o nó direito', 'O nó direito é um dos mais simples de se fazer e um dos mais conhecidos também, nomeado por várias pessoas como pai dos nós. O nó direito é o símbolo da força e a união da fraternidade que une escoteiros de todas as nacionalidades. Entretanto, ele é muito usado em trabalho em altura e requer atenção ao executar a manobra, no entanto, a maioria dos trabalhadores executam a técnica errada e acabam fazendo um nó cego. A diferença de um nó cego e um nó direito é que o nó cego pode se soltar sozinho. Ele tem as principais características positivas de um nó. Essa amarração serve para unir as duas pontas da corda, visando formar uma corda maior ou uma alça. A única desvantagem desse nó é que ele só ficará firme se você utilizar cordas de material sintético e com a mesma largura. Esse é um dos principais nós, e deve ser bem dominado em qualquer situação, principalmente se a vida de alguém for colocada em risco em função do nó feito.        O nó direito e vários outros são utilizados para executar trabalho em altura, exercício que só pode ser proferido se o profissional estiver devidamente habilitado seguindo os parâmetros do Ministério. Existem cursos específicos para nós e amarrações, no entanto, o curso NR 35 Trabalho em altura – Online / Curso NR 35 Multiplicador – Trabalho em altura – Online, aplicado pela MA Consultoria e treinamentos, aborda todo esse conteúdo de forma fácil e prática, inovando totalmente a forma que conhecemos de estudar!', '2024-10-04', '', 1);
+INSERT INTO `topico` (`id`, `nome`, `body`, `data`, `anexos`, `userid`, `restrito`) VALUES
+(57, 'Dúvida sobre o escotismo', 'Estou interessada em me envolver no movimento escoteiro, mas antes de tomar uma decisão final, gostaria de esclarecer algumas dúvidas sobre como o escotismo lida com o equilíbrio entre tradição e modernidade.\r\n\r\nTenho lido bastante sobre os princípios fundamentais do movimento, como o respeito à natureza, o serviço à comunidade e o desenvolvimento pessoal. No entanto, fico com algumas questões sobre como esses valores se aplicam em um mundo cada vez mais digital. Por exemplo, em atividades ao ar livre, como acampamentos e excursões, até que ponto o uso de tecnologias como GPS, smartphones ou outras ferramentas digitais é aceito ou incentivado, sem comprometer a essência do escotismo?\r\n\r\nGostaria de saber como o movimento lida com a integração de novos métodos e recursos, e se existem restrições sobre o uso de tecnologia nas atividades práticas. Também estou curioso sobre como o escotismo pode me ajudar a desenvolver habilidades de liderança, trabalho em equipe e responsabilidade, além de contribuir para minha formação pessoal.\r\n\r\nAgradeço desde já pela atenção e pelas respostas.', '2024-11-29', '', 14, 0);
 
 --
 -- Índices para tabelas despejadas
@@ -265,10 +254,18 @@ ALTER TABLE `comentarios`
   ADD KEY `resposta_id` (`resposta_id`);
 
 --
+-- Índices de tabela `compras`
+--
+ALTER TABLE `compras`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_compras_usuario` (`userid`);
+
+--
 -- Índices de tabela `events`
 --
 ALTER TABLE `events`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk` (`created_by`);
 
 --
 -- Índices de tabela `images`
@@ -289,7 +286,8 @@ ALTER TABLE `notificacoes`
 -- Índices de tabela `produtos`
 --
 ALTER TABLE `produtos`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_produtos_usuario` (`userid`);
 
 --
 -- Índices de tabela `respostas`
@@ -326,13 +324,19 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT de tabela `comentarios`
 --
 ALTER TABLE `comentarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+
+--
+-- AUTO_INCREMENT de tabela `compras`
+--
+ALTER TABLE `compras`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de tabela `events`
 --
 ALTER TABLE `events`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de tabela `images`
@@ -344,31 +348,31 @@ ALTER TABLE `images`
 -- AUTO_INCREMENT de tabela `notificacoes`
 --
 ALTER TABLE `notificacoes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de tabela `produtos`
 --
 ALTER TABLE `produtos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=185;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de tabela `respostas`
 --
 ALTER TABLE `respostas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de tabela `tbl_usuarios`
 --
 ALTER TABLE `tbl_usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de tabela `topico`
 --
 ALTER TABLE `topico`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 
 --
 -- Restrições para tabelas despejadas
@@ -383,6 +387,18 @@ ALTER TABLE `comentarios`
   ADD CONSTRAINT `useridcoment` FOREIGN KEY (`userid`) REFERENCES `tbl_usuarios` (`id`);
 
 --
+-- Restrições para tabelas `compras`
+--
+ALTER TABLE `compras`
+  ADD CONSTRAINT `fk_compras_usuario` FOREIGN KEY (`userid`) REFERENCES `tbl_usuarios` (`id`);
+
+--
+-- Restrições para tabelas `events`
+--
+ALTER TABLE `events`
+  ADD CONSTRAINT `fk` FOREIGN KEY (`created_by`) REFERENCES `tbl_usuarios` (`id`);
+
+--
 -- Restrições para tabelas `images`
 --
 ALTER TABLE `images`
@@ -394,6 +410,12 @@ ALTER TABLE `images`
 --
 ALTER TABLE `notificacoes`
   ADD CONSTRAINT `notificacoes_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `tbl_usuarios` (`id`);
+
+--
+-- Restrições para tabelas `produtos`
+--
+ALTER TABLE `produtos`
+  ADD CONSTRAINT `fk_produtos_usuario` FOREIGN KEY (`userid`) REFERENCES `tbl_usuarios` (`id`);
 
 --
 -- Restrições para tabelas `respostas`
