@@ -116,9 +116,13 @@ if (isset($_SESSION['on'])) {
             $sqluser = 'SELECT * FROM tbl_usuarios WHERE id LIKE '.$linha['userid'].'';
             $resuser = $conn ->query($sqluser);
             $user = $resuser ->fetch_assoc();
-            print "<tr><td><a href='topico.php?id=".$linha['id']."'>".$linha['nome']."</a></td>";
-            print "<td>".$user['nome']."</td>";
-            print "<td>".$linha['data']."</td>";
+            if($linha['restrito']==0){
+              print "<tr><td><a href='topico.php?id=".$linha['id']."'>".$linha['nome']."</a></td>";
+              print "<td>".$user['nome']."</td>";
+              print "<td>".$linha['data']."</td>";
+            }
+            else{
+            }
         }
         ?>
   </tbody>

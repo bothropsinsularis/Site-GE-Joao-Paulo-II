@@ -40,7 +40,7 @@ $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
     if (isset($_SESSION['on'])) {
     $logged = true;
     }
-    if($_SESSION['tipo']>2){
+    if($_SESSION['tipo']<2){
         header('Location: ../../frontend/principal/index.php');
     }
     ?>

@@ -175,7 +175,7 @@ include_once('../../backend/classes/conn.php')
           print "<td>".$row['data']."</td>";
           if($linha['id']==$_SESSION['userid']){
             print '<td> 
-                        <a href="../../backend/adm/delete_topico?id='.$linha["id"].'">
+                        <a href="delete_topico.php?id='.$row["id"].'">
                         <button class="btn btn-danger btn-sm mx-1">
                             <i class="bi bi-trash"></i>
                         </button>
