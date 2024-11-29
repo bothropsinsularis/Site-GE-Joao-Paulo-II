@@ -121,7 +121,10 @@ if (isset($_SESSION['on'])) {
               print "<td>".$user['nome']."</td>";
               print "<td>".$linha['data']."</td>";
             }
-            else{
+            if($linha['restrito']==1 && $_SESSION['tipo']>=1){
+              print "<tr><td><a href='topico.php?id=".$linha['id']."'>".$linha['nome']."</a></td>";
+              print "<td>".$user['nome']."</td>";
+              print "<td>".$linha['data']."</td>";
             }
         }
         ?>

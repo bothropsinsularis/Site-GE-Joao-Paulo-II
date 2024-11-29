@@ -93,6 +93,17 @@
             <label for="message">Insira o conteúdo do tópico</label><br>
             <textarea class="input-custom" rows="5" name="body" cols="50" id="body" tabindex="-1"></textarea>
             <br><br>
+            <?php
+            if($_SESSION['tipo']>=1){
+
+             echo '<label for="message">Restrição de Visibilidade</label><br>
+              <select id="menu1" name="restrito" required="true" class="input-custom">
+                      <option value="0"><strong>Não</strong></option>
+                      <option value="1"><strong>Sim</strong></option>
+                      </select>
+              <br><br>';
+            }
+            ?>
             <label>Insira os anexos do Tópico:</label>
             <input type="file" name="anexo">
           <br/><br/>

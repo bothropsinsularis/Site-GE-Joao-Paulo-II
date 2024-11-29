@@ -14,7 +14,9 @@ $linha = $res->fetch_assoc();
 // } else {
 //     die("Tópico não encontrado.");
 // }
-
+if($linha['restrito']==1 && $_SESSION['tipo']==0){
+    header('Location: main.php');   
+}
 // Verifica se o usuário está logado
 $logged = isset($_SESSION['userid']);
 
@@ -55,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['comentario'])) {
 }
 
 // Recupera os comentários do tópico
-$sql_comentarios = "SELECT * FROM comentarios ORDER BY data DESC";
+$sql_comentarios = "SELECT * FROM comentarios WHERE idcomentario=".$id;
 $result_comentarios = $conn->query($sql_comentarios);
 
 ?>
@@ -436,8 +438,8 @@ textarea {
 
 <div class="user-post w-100 mb-5">
     <h1 class="post-title text-center"><?php echo htmlspecialchars($linha['nome']); ?></h1>
-    <?php if (!empty($linha['image_url'])): ?>
-        <img src="<?php echo htmlspecialchars($linha['image_url']); ?>" alt="Imagem" class="img-fluid my-3 post-image d-block mx-auto">
+    <?php if (!empty($linha['anexos'])): ?>
+        <img src="uploads/<?php echo $linha['anexos'] ?>" alt="Imagem do tópico" class="post-image" width="40%"><br>
     <?php endif; ?>
     <p class="post-text text-center">
         <?php echo nl2br(htmlspecialchars($linha['body'])); ?>
