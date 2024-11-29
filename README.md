@@ -48,9 +48,9 @@ Foram determinados os seguintes objetivos para a plataforma de divulgação do G
  
 #### 1.4. Sobre os autores
 ___
-- ``Kaua Lucio Rosa`` <a href="https://github.com/bothropsinsularis" title="GitHub"><img align="center" src="/public/assets/icons/social_icon_gh.png" width="22" height="22"></a> 
-- ``João Yuri de Moura Silva`` <a href="https://github.com/YuriMog" title="GitHub"><img align="center" src="/public/assets/icons/social_icon_gh.png" width="22" height="22"></a> 
-- ``Adryan Felipe Almeida de Souza`` <a href="https://github.com/adryanfelipealmeida" title="GitHub"><img align="center" src="/public/assets/icons/social_icon_gh.png" width="22" height="22"></a> 
+- ``Kaua Lucio Rosa`` <a href="https://github.com/bothropsinsularis" title="GitHub"></a> 
+- ``João Yuri de Moura Silva`` <a href="https://github.com/YuriMog" title="GitHub"></a> 
+- ``Adryan Felipe Almeida de Souza`` <a href="https://github.com/adryanfelipealmeida" title="GitHub"></a> 
 
 <br>
 
@@ -81,7 +81,7 @@ Clone/faça download deste repositório na sua pasta `/htdocs`. Inicie o Apache 
 
 #### 1.4. Uso 
 ___
-<img align="center" src="/prints/home.png" width="auto" height="auto">  
+<img align="center" src="/frontend/public/prints/home.png" width="auto" height="auto">  
 <br>
 
 Entrando pela primeira vez, acessará a página Home, que dá acesso as páginas Regulamento Interno, Galeria, Pogramação Semestral, dentre outras. Use as credenciais abaixo para fazer login como administrador. Acesse a página ADM (MOD para usuários do tipo moderador) para acessar o painel de controle, com funções como banir usuários e deletar postagens.
@@ -90,13 +90,13 @@ Entrando pela primeira vez, acessará a página Home, que dá acesso as páginas
 - Senha: `admin` 
 <br>
 Segue abaixo algumas capturas de tela da aplicação:<br>
-<img align="center" src="/prints/adm.png" width="auto" height="auto">  
+<img align="center" src="/frontend/public/prints/adm.png" width="auto" height="auto">  
 <br>
-<img align="center" src="/prints/forum.png" width="auto" height="auto">  
+<img align="center" src="/frontend/public/prints/forum.png" width="auto" height="auto">  
 <br>
-<img align="center" src="/prints/adm.png" width="auto" height="auto">  
+<img align="center" src="/frontend/public/prints/adm.png" width="auto" height="auto">  
 <br>
-<img align="center" src="/prints/fale.png" width="auto" height="auto">  
+<img align="center" src="/frontend/public/prints/fale.png" width="auto" height="auto">  
 <br>
 
 ## 3. Considerações Finais
