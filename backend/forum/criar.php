@@ -103,6 +103,9 @@
                       </select>
               <br><br>';
             }
+            else{
+              echo '<input type="hidden" name="restrito" value="0">';
+            }
             ?>
             <label>Insira os anexos do Tópico:</label>
             <input type="file" name="anexo">

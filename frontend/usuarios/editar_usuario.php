@@ -11,7 +11,7 @@
     $respositorioUsuario->alterarUsuario($usuarioEdit);
     $respositorioUsuario->atualizarUsuario($_SESSION['userid']);
     
-    header('Location: ../principal/user.php');
+    header('Location: ../principal/user.php?id='.$_SESSION['userid']);
     
     exit;
 
