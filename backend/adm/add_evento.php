@@ -1,20 +1,18 @@
 <?php
 include 'db.php';
-
+session_start();
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $title = $_POST['title'];
     $description = $_POST['description'];
     $event_date = $_POST['event_date'];
     $created_by = $_SESSION['userid'];
 
-    $stmt = $pdo->prepare("INSERT INTO events (title, description, event_date, userid) VALUES (?, ?, ?, ?)");
+    $stmt = $pdo->prepare("INSERT INTO events (title, description, event_date, created_by) VALUES (?, ?, ?, ?)");
     $stmt->execute([$title, $description, $event_date, $created_by]);
 
-    echo "Evento adicionado com sucesso!";
 }
 ?>
     <?php
-    session_start();
     // if(!isset($_SESSION['on'])) {
     //     $_SESSION['msg'] = 'Não está logado';
     //     echo $_SESSION['msg'];
@@ -114,9 +112,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <textarea class="input-custom" name="description" id="description" required></textarea><br><br>
         <label for="event_date">Data do Evento:</label>
     <input type="date" id="event_date" name="event_date" required><br><br>
-        <label for="image">Imagem</label>
-        <input type="file" required id="image" name="image">
-      <br/><br/>
+       
       <input type="submit" class="btn-custom" id="submitButton" name="Enviar" value="Adicionar Evento">
     </div>
    <br> <a href="index_adm.php">Voltar</a>
