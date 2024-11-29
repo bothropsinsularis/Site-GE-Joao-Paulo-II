@@ -9,12 +9,12 @@
         $mail->Host = 'smtp.gmail.com';
         $mail->SMTPAuth = true;
         $mail->SMTPSecure = 'tls';
-        $mail->Username = 'grupoescoteirojpii@gmail.com';
-        $mail->Password = 'qjap vhgv auln duul';
+        $mail->Username = 'insira seu email';
+        $mail->Password = 'insira a senha de aplicação do email';
         $mail->Port = 587;
         $mail->setFrom($_POST['nome']);
         $mail->addReplyTo($_POST['email']);
-        $mail->addAddress('grupoescoteirojpii@gmail.com');
+        $mail->addAddress('');
         $mail->isHTML(true);
         $mail->Subject = 'Fale Conosco';
         $mail->Body    = $_POST['nome'] . ': ' . $_POST['body'];

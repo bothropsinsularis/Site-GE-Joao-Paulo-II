@@ -5,7 +5,6 @@
         require 'vendor/autoload.php';
         include_once '../classes/conn.php';
 
-        //zur4mavis@gmail.com
 
         $sql='SELECT * FROM tbl_usuarios WHERE email="'.$_POST['email'].'";';
         $res=$conn->query($sql);
@@ -24,8 +23,8 @@
         $mail->Host = 'smtp.gmail.com';
         $mail->SMTPAuth = true;
         $mail->SMTPSecure = 'tls';
-        $mail->Username = 'grupoescoteirojpii@gmail.com';
-        $mail->Password = 'qjap vhgv auln duul';
+        $mail->Username = 'insira seu email';
+        $mail->Password = 'insira a senha de aplicação do email';
         $mail->Port = 587;
         $mail->setFrom('GE João Paulo II');
         $mail->addReplyTo($_POST['email']);
