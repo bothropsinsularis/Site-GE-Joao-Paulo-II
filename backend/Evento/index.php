@@ -96,6 +96,12 @@ if (isset($_SESSION['on'])) {
                 <a class="nav-link" href="../../backend/loja/loja.php">Loja</a>
               </li>';
             }
+            if($_SESSION['tipo']==2){
+              echo '<li class="nav-item">
+                <a class="nav-link" href="../../backend/adm/index_mod.php">MOD</a>
+              </li>';
+            
+            }
             if($_SESSION['tipo']==3){
               echo '<li class="nav-item">
                 <a class="nav-link" href="../../backend/adm/index_adm.php">ADM</a>
